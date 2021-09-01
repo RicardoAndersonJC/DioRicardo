@@ -1,7 +1,6 @@
 package com.dio.projectAPI.Service;
 
 import com.dio.projectAPI.Repository.CategoriaUsuarioRepository;
-import com.dio.projectAPI.Repository.JornadaRepository;
 import com.dio.projectAPI.model.CategoriaUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ public class CategoriaUsuarioService {
     CategoriaUsuarioRepository categoriaUsuarioRepository;
 
 
-    public CategoriaUsuario saveJornada(CategoriaUsuario categoriaUsuario) {
+    public CategoriaUsuario saveCategoria(CategoriaUsuario categoriaUsuario) {
         return categoriaUsuarioRepository.save(categoriaUsuario);
     }
 

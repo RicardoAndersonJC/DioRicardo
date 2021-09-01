@@ -1,7 +1,7 @@
 package com.dio.projectAPI.controller;
 
-import com.dio.projectAPI.Service.UsuarioService;
-import com.dio.projectAPI.model.Usuario;
+import com.dio.projectAPI.Service.NivelAcessoService;
+import com.dio.projectAPI.model.NivelAcesso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,29 +10,29 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/acesso")
 public class NivelAcessoController {
     @Autowired
-    UsuarioService usuarioService;
+    NivelAcessoService nivelAcessoService;
     @PostMapping
-    public Usuario saveUsuario(@RequestBody Usuario usuario){
-        return usuarioService.saveUsuario(usuario);
+    public NivelAcesso saveAcesso(@RequestBody NivelAcesso nivelAcesso){
+        return nivelAcessoService.saveNivel(nivelAcesso);
     }
     @GetMapping
-    public List<Usuario> getUsuariosList(){
-        return usuarioService.findAll();
+    public List<NivelAcesso> getAcessoList(){
+        return nivelAcessoService.findAll();
     }
-    @GetMapping("{idUser}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable("idUsuario") long idUsuario) throws Exception{
-        return ResponseEntity.ok(usuarioService.findById(idUsuario).orElseThrow(() -> new NoSuchElementException("Not Found")));
+    @GetMapping("/{idAcesso}")
+    public ResponseEntity<NivelAcesso> getAcessoById(@PathVariable("idAcesso") long idAcesso) throws Exception{
+        return ResponseEntity.ok(nivelAcessoService.findById(idAcesso).orElseThrow(() -> new NoSuchElementException("Not Found")));
     }
 
-    @DeleteMapping("/{idUser}")
-    public void delUsuario(@PathVariable("idUser") long idUser){
-        usuarioService.delId(idUser);
+    @DeleteMapping("/{idAcesso}")
+    public void delAcesso(@PathVariable("idAcesso") long idAcesso){
+        nivelAcessoService.delId(idAcesso);
     }
     @PutMapping
-    public Usuario updateUsuario(@RequestBody Usuario usuario){
-        return usuarioService.updateUsuario(usuario);
+    public NivelAcesso updateAcesso(@RequestBody NivelAcesso nivelAcesso){
+        return nivelAcessoService.updateNivelAcesso(nivelAcesso);
     }
 }

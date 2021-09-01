@@ -1,8 +1,6 @@
 package com.dio.projectAPI.controller;
 
-import com.dio.projectAPI.Service.JornadaService;
 import com.dio.projectAPI.Service.UsuarioService;
-import com.dio.projectAPI.model.JornadaTrabalho;
 import com.dio.projectAPI.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.dio.projectAPI.controller;
 
-import com.dio.projectAPI.Service.UsuarioService;
-import com.dio.projectAPI.model.Usuario;
+import com.dio.projectAPI.Service.CalendarioService;
+import com.dio.projectAPI.model.Calendario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,29 +10,29 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/calendarios")
 public class CalendarioController {
     @Autowired
-    UsuarioService usuarioService;
+    CalendarioService calendarioService;
     @PostMapping
-    public Usuario saveUsuario(@RequestBody Usuario usuario){
-        return usuarioService.saveUsuario(usuario);
+    public Calendario saveCalendario(@RequestBody Calendario calendario){
+        return calendarioService.saveCalendario(calendario);
     }
     @GetMapping
-    public List<Usuario> getUsuariosList(){
-        return usuarioService.findAll();
+    public List<Calendario> getUsuariosList(){
+        return calendarioService.findAll();
     }
-    @GetMapping("{idUser}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable("idUsuario") long idUsuario) throws Exception{
-        return ResponseEntity.ok(usuarioService.findById(idUsuario).orElseThrow(() -> new NoSuchElementException("Not Found")));
+    @GetMapping("/{idCalendario}")
+    public ResponseEntity<Calendario> getCalendarioById(@PathVariable("idCalendario") long idCalendario) throws Exception{
+        return ResponseEntity.ok(calendarioService.findById(idCalendario).orElseThrow(() -> new NoSuchElementException("Not Found")));
     }
 
-    @DeleteMapping("/{idUser}")
-    public void delUsuario(@PathVariable("idUser") long idUser){
-        usuarioService.delId(idUser);
+    @DeleteMapping("/{idCalendario}")
+    public void delCalendario(@PathVariable("idCalendario") long idCalendario){
+        calendarioService.delId(idCalendario);
     }
     @PutMapping
-    public Usuario updateUsuario(@RequestBody Usuario usuario){
-        return usuarioService.updateUsuario(usuario);
+    public Calendario updateCalendario(@RequestBody Calendario calendario){
+        return calendarioService.updateCalendario(calendario);
     }
 }

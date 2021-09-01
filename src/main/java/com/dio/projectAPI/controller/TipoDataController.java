@@ -1,7 +1,7 @@
 package com.dio.projectAPI.controller;
 
-import com.dio.projectAPI.Service.UsuarioService;
-import com.dio.projectAPI.model.Usuario;
+import com.dio.projectAPI.Service.TipoDataService;
+import com.dio.projectAPI.model.TipoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,29 +10,29 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/tipodata")
 public class TipoDataController {
     @Autowired
-    UsuarioService usuarioService;
+    TipoDataService tipoDataService;
     @PostMapping
-    public Usuario saveUsuario(@RequestBody Usuario usuario){
-        return usuarioService.saveUsuario(usuario);
+    public TipoData saveTipoData(@RequestBody TipoData tipoData){
+        return tipoDataService.saveTipoData(tipoData);
     }
     @GetMapping
-    public List<Usuario> getUsuariosList(){
-        return usuarioService.findAll();
+    public List<TipoData> getTipoDataList(){
+        return tipoDataService.findAll();
     }
-    @GetMapping("{idUser}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable("idUsuario") long idUsuario) throws Exception{
-        return ResponseEntity.ok(usuarioService.findById(idUsuario).orElseThrow(() -> new NoSuchElementException("Not Found")));
+    @GetMapping("/{idTipoData}")
+    public ResponseEntity<TipoData> getTipoDataById(@PathVariable("idTipoData") long idUsuario) throws Exception{
+        return ResponseEntity.ok(tipoDataService.findById(idUsuario).orElseThrow(() -> new NoSuchElementException("Not Found")));
     }
 
-    @DeleteMapping("/{idUser}")
-    public void delUsuario(@PathVariable("idUser") long idUser){
-        usuarioService.delId(idUser);
+    @DeleteMapping("/{idTipoData}")
+    public void delTipoData(@PathVariable("idTipoData") long idTipoData){
+        tipoDataService.delId(idTipoData);
     }
     @PutMapping
-    public Usuario updateUsuario(@RequestBody Usuario usuario){
-        return usuarioService.updateUsuario(usuario);
+    public TipoData updateTipoData(@RequestBody TipoData tipoData){
+        return tipoDataService.updateTipoData(tipoData);
     }
 }

@@ -1,8 +1,11 @@
 package com.dio.projectAPI.controller;
 
-import com.dio.projectAPI.Service.UsuarioService;
-import com.dio.projectAPI.model.Usuario;
+import com.dio.projectAPI.DTO.CategoriasDTO;
+import com.dio.projectAPI.DTO.DtotoObject;
+import com.dio.projectAPI.Service.CategoriaUsuarioService;
+import com.dio.projectAPI.model.CategoriaUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,29 +13,30 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/categorias")
 public class CategoriaUsuarioController {
     @Autowired
-    UsuarioService usuarioService;
+    CategoriaUsuarioService categoriaUsuarioService;
     @PostMapping
-    public Usuario saveUsuario(@RequestBody Usuario usuario){
-        return usuarioService.saveUsuario(usuario);
+    public ResponseEntity<CategoriasDTO> saveCategoria(@RequestBody DtotoObject dtotoObject){
+        CategoriaUsuario categoriaUsuario = categoriaUsuarioService.saveCategoria(dtotoObject.categoriaObject());
+        return new ResponseEntity<>(CategoriasDTO.categoriaResponseDTO(categoriaUsuario), HttpStatus.CREATED);
     }
     @GetMapping
-    public List<Usuario> getUsuariosList(){
-        return usuarioService.findAll();
+    public List<CategoriaUsuario> getCategoriaList(){
+        return categoriaUsuarioService.findAll();
     }
-    @GetMapping("{idUser}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable("idUsuario") long idUsuario) throws Exception{
-        return ResponseEntity.ok(usuarioService.findById(idUsuario).orElseThrow(() -> new NoSuchElementException("Not Found")));
+    @GetMapping("/{idCategoria}")
+    public ResponseEntity<CategoriaUsuario> getCategoriaById(@PathVariable("idCategoria") long idCategoria) throws Exception{
+        return ResponseEntity.ok(categoriaUsuarioService.findById(idCategoria).orElseThrow(() -> new NoSuchElementException("Not Found")));
     }
 
-    @DeleteMapping("/{idUser}")
-    public void delUsuario(@PathVariable("idUser") long idUser){
-        usuarioService.delId(idUser);
+    @DeleteMapping("/{idCategoria}")
+    public void delCategoria(@PathVariable("idCategoria") long idCategoria){
+        categoriaUsuarioService.delId(idCategoria);
     }
     @PutMapping
-    public Usuario updateUsuario(@RequestBody Usuario usuario){
-        return usuarioService.updateUsuario(usuario);
+    public CategoriaUsuario updateCategoria(@RequestBody CategoriaUsuario categoriaUsuario){
+        return categoriaUsuarioService.updateCategoria(categoriaUsuario);
     }
 }

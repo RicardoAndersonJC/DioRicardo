@@ -29,7 +29,7 @@ public class CalendarioService {
     public void delId(long id){
         calendarioRepository.deleteById(id);
     }
-    public Calendario updateJornada(Calendario calendario) {
+    public Calendario updateCalendario(Calendario calendario) {
         return calendarioRepository.save(calendario);
     }
 }
